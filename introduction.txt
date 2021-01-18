@@ -1,0 +1,63 @@
+Overall Concept:
+when you have historical data what are we expected to do?
+  To build the model we split data into train and test. Example: x is input bunch of images and y - label(output) which explains what images are they. 
+  we split the data in proportion of train(80%) and test(20%) as an example assuming its a balanced data set, with limited data
+  you call it as imbalanced dataset when data is less than 30%(k-fold cross validation... there are many other techniques we handle this imbalanced dataset)
+  whatever the data which is not part of training data is you test data.
+  Model learns patterns between X and Y. 
+     We build the Model using an algorithm, model learned patterns between X and Y. 
+     when the patterns are learnt there is mathematical equation formulated. 
+     Y = b+w1x1+w2x2. And you build the model Equation we build is used to test on test data, we get test accuracy.
+Accuracy = Correct predictions / Overall predictions 
+Test the equation on Train data and you get training accuracy.
+If training accuracy & test accuracy is high and close to each other then it’s called [Right fit model]
+If training accuracy is low & test accuracy is low then it’s called [Underfit fit model / Bias]
+If training accuracy high & test accuracy is low then it’s called as [Over fitting / Variance]. We use regularisation techniques to fix this. Testing error is also called as generalisation error.
+
+To improve the accuracy we tune Hyper Parameters. Something we can change to improve accuracy is called Hyper Parameter.
+
+Models comparison: Same observations should be used to when you compare model accuracy. Model 1 gives Test accuracy of 85% and model 2 gives Test accuracy of 90% which means the observations used for these models should be same; you cannot use different data and compare with model 1 & 2. We shouldn’t randomly split the data. Underline data for Model 1 & 2 should be same. To do this we set SEED (123) when we set, each time you split same observations will be part of your test and train.
+Validation Data: validation data is used to tune Hyperparameters when there are lot of inputs or parameters only then it makes sense using validation data. If there are less inputs or parameters then it doesn’t makes sense.
+
+Neural network:
+Each and every neuron has 2 components (integration + activation) except initial inputs.
+No of inputs = no of Neurons
+Ex: 5 inputs means  5 neurons , there is no hidden layer in this example, 5 input neurons with 1 out neuron which has 2 components
+(this neuron has integration + activation function), finally we have an output. This algorithm without hidden layers with 1 output is called as Perceptron Algorithm.
+
+Forward Pass: Let’s say there are 5 neurons inputs(x1,x2,x3,x4,x5) 1st row +bias(is always 1)  passed through the network and you get predicted value. Now compare with actual value with predicted. If actual and predicted value mismatch then it’s called as ERROR or Loss Function. The take 2nd row, passed through the network and you get predicted value. Now compare with actual value with predicted. This is the second loss function. Likewise you have 1000 observations and we get 1000 loss values, when you aggregate all the loss functions you get cost function.
+Once you get cost function come back and update weights, Each time you go forward calculate loss function and come back and update your weights and this algorithm is called Back propagation algorithm.
+Do this forward and backward pass and update weights in back propagation till you get minimum error which is local minima.
+
+Algorithm which is used to minimize the Error / Cost function is called Gradient descent algorithm.
+Weight Updating:
+                   New weight(Wn+1) = old weight(Wn) +n(eta)*(actual value – predicted )* X(input value)
+n(eta/learning rate values is always between 0 - 1) – learning rate is hyper parameter – if eta value is too small the it take too small steps to reach local minima error and takes long time to reach minima. If eta value is high then it over shoots and miss minima error. 
+To choose eta value we have different techniques like nestrov momentum, decay parameters…. We will see later.
+Perceptron algorithm is used to solve linear boundaries.
+.   . Since perceptron algorithm handles only linear algorithm only, people have come up with multi 
+  .   Layered perceptron (MLP)/ANN (artificial neural network), Dense network (DN), Fully connected network (FCN) all are same.
+
+MLP/ANN/DN /FCN: 
+You can have any number of hidden layers (hyper parameter), with in hidden layers any number of neurons. Every neuron is connected to every other neuron in forward layer in FC.
+You segregate 2 distinct types ex: black and white by using line. Line function is Y = mx+C, or               Y = W1X1 + b(bias)
+Y = output, W1 – weight, X1 – input, b = bias
+Use loss or cost function only for Optimisation – use gradient descent algorithm
+Use error function when y is continuous. ME,MSE,RMSE,MAE,MASE  these are used to evaluate model accuracy
+
+Epoch: if you pass all your observations 1 time through your network then it’s called 1 Epoch
+Iteration: when you come back and update your weights it’s called 1 Iteration, each time you update weights its called 1 iteration.
+Stochastic: Randomness, randomly you choose inputs and pass it through network and then you get loss fun, once you get loss fun go back in your network and update your weights.
+
+Batch Size:
+Batch GD: each observation weight is updated individually. After each row you pass, if you update each weight individually , then 1000 observations has 1000 Epoch’s 1000 iterations.
+SGD: After passing through each row then we update all weights at a time. EX: pass each observation and update all 1000 observations at a time is called SGD.
+Mini-batch SGD: send batch wise and update weights batch wise
+
+Y	                              Loss/Cost function	      Error Function/Entropy	        Activation Function
+continuous	                    ME,MAE,MSE	              ME,MAE,MSE	                    Linear/Identity
+discrete in 2 categories	      Binary Cross Entropy	    Cross table/confusion matrix	  Sigmoid/tanh
+discrete in > 2 categories	    Categorical Cross Entropy	Cross table/confusion matrix	  softmax
+
+Information gain = entropy before – entropy after
+
